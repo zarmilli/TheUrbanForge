@@ -1,0 +1,11 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 5, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/app/layout.js"],"sourcesContent":["import \"./globals.css\";\r\n\r\nexport const metadata = {\r\n  title: 'The Urban Forge',\r\n  description: 'Delicious meals delivered fast.',\r\n  manifest: '/manifest.json',\r\n  themeColor: '#1d1d1d',\r\n};\r\n\r\nexport default function RootLayout({ children }) {\r\n  return (\r\n    <html lang=\"en\">\r\n      <body>{children}</body>\r\n    </html>\r\n  );\r\n}\r\n"],"names":[],"mappings":";;;;;;;;AAEO,MAAM,WAAW;IACtB,OAAO;IACP,aAAa;IACb,UAAU;IACV,YAAY;AACd;AAEe,SAAS,WAAW,EAAE,QAAQ,EAAE;IAC7C,qBACE,wPAAC;QAAK,MAAK;kBACT,cAAA,wPAAC;sBAAM;;;;;;;;;;;AAGb"}},
+    {"offset": {"line": 35, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}},
+    {"offset": {"line": 47, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":""}},
+    {"offset": {"line": 52, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}},
+    {"offset": {"line": 63, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/.next-internal/server/app/signup/page/actions.js"],"sourcesContent":["__turbopack_export_value__({\n});"],"names":[],"mappings":"AAAA,2BAA2B,CAC3B"}},
+    {"offset": {"line": 64, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

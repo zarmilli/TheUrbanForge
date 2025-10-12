@@ -1,0 +1,10 @@
+{
+  "/splash/page": "app/splash/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/intro/page": "app/intro/page.js",
+  "/login/page": "app/login/page.js",
+  "/home/page": "app/home/page.js",
+  "/cooked/page": "app/cooked/page.js",
+  "/cooked/meals/page": "app/cooked/meals/page.js",
+  "/cooked/[id]/page": "app/cooked/[id]/page.js"
+}

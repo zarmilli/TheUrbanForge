@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 5, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/app/ClientLayout.jsx"],"sourcesContent":["\"use client\";\r\nimport { usePathname } from \"next/navigation\";\r\nimport Navbar from \"@/components/navbar\";\r\n\r\nexport default function ClientLayout({ children }) {\r\n  const pathname = usePathname();\r\n  const showNavbar = [\"/home\", \"/orders\", \"/settings\"].includes(pathname);\r\n\r\n  return (\r\n    <div className=\"relative min-h-screen flex flex-col\">\r\n      <main className=\"flex-1\">{children}</main>\r\n      {showNavbar && <Navbar />}\r\n    </div>\r\n  );\r\n}\r\n"],"names":[],"mappings":";;;;;;;;;AAAA;;;AAIe,SAAS,aAAa,EAAE,QAAQ,EAAE;;IAC/C,MAAM,WAAW,CAAA,GAAA,qIAAA,CAAA,cAAW,AAAD;IAC3B,MAAM,aAAa;QAAC;QAAS;QAAW;KAAY,CAAC,QAAQ,CAAC;IAE9D,qBACE,6LAAC;QAAI,WAAU;;0BACb,6LAAC;gBAAK,WAAU;0BAAU;;;;;;YACzB,4BAAc,6LAAC,uHAAA,CAAA,UAAM;;;;;;;;;;;AAG5B;GAVwB;;QACL,qIAAA,CAAA,cAAW;;;KADN"}},
+    {"offset": {"line": 56, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

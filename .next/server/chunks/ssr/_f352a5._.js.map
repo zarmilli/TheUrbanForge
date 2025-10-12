@@ -1,0 +1,9 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 5, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/app/layout.js"],"sourcesContent":["import \"./globals.css\";\r\nimport ClientLayout from \"@/app/ClientLayout\";\r\n\r\nexport const metadata = {\r\n  title: \"The Urban Forge\",\r\n  description: \"Delicious meals delivered fast.\",\r\n  manifest: \"/manifest.json\",\r\n  themeColor: \"#1d1d1d\",\r\n};\r\n\r\nexport default function RootLayout({ children }) {\r\n  return (\r\n    <html lang=\"en\">\r\n      <body className=\"bg-[#1d1d1d] text-white\">\r\n        <ClientLayout>{children}</ClientLayout>\r\n      </body>\r\n    </html>\r\n  );\r\n}\r\n"],"names":[],"mappings":";;;;;;;;;;AAGO,MAAM,WAAW;IACtB,OAAO;IACP,aAAa;IACb,UAAU;IACV,YAAY;AACd;AAEe,SAAS,WAAW,EAAE,QAAQ,EAAE;IAC7C,qBACE,wPAAC;QAAK,MAAK;kBACT,cAAA,wPAAC;YAAK,WAAU;sBACd,cAAA,wPAAC,oHAAA,CAAA,UAAY;0BAAE;;;;;;;;;;;;;;;;AAIvB"}},
+    {"offset": {"line": 44, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}},
+    {"offset": {"line": 55, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/.next-internal/server/app/_not-found/page/actions.js"],"sourcesContent":["__turbopack_export_value__({\n});"],"names":[],"mappings":"AAAA,2BAA2B,CAC3B"}},
+    {"offset": {"line": 56, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

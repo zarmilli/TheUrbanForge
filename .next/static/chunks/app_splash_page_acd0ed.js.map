@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 5, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/app/splash/page.js"],"sourcesContent":["\"use client\";\r\nimport { useEffect } from \"react\";\r\nimport { useRouter } from \"next/navigation\";\r\n\r\nexport default function SplashPage() {\r\n  const router = useRouter();\r\n\r\n  useEffect(() => {\r\n    const timer = setTimeout(() => {\r\n      router.push(\"/intro\");\r\n    }, 2000); // auto-navigate after 2 seconds\r\n    return () => clearTimeout(timer);\r\n  }, [router]);\r\n\r\n  return (\r\n    <div className=\"flex items-center justify-center h-screen bg-[#1d1d1d] animate-fadeIn\">\r\n      <img\r\n        src=\"/logo.png\" // <-- make sure your logo is in /public/logo.png\r\n        alt=\"The Urban Forge Logo\"\r\n        className=\"w-40 h-40 object-contain\"\r\n      />\r\n    </div>\r\n  );\r\n}\r\n"],"names":[],"mappings":";;;;;;;;;AAAA;;;AAIe,SAAS;;IACtB,MAAM,SAAS,CAAA,GAAA,qIAAA,CAAA,YAAS,AAAD;IAEvB,CAAA,GAAA,6JAAA,CAAA,YAAS,AAAD,EAAE;QACR,MAAM,QAAQ,WAAW;YACvB,OAAO,IAAI,CAAC;QACd,GAAG,OAAO,gCAAgC;QAC1C,OAAO,IAAM,aAAa;IAC5B,GAAG;QAAC;KAAO;IAEX,qBACE,6LAAC;QAAI,WAAU;kBACb,cAAA,6LAAC;YACC,KAAI,YAAY,iDAAiD;;YACjE,KAAI;YACJ,WAAU;;;;;;;;;;;AAIlB;GAnBwB;;QACP,qIAAA,CAAA,YAAS;;;KADF"}},
+    {"offset": {"line": 54, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}
