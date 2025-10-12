@@ -12,7 +12,7 @@ export default function RootPage() {
       const { data: { user } } = await supabase.auth.getUser();
 
       if (user) {
-        router.replace("/splash"); // ✅ go to home if signed in
+        router.replace("/home"); // ✅ go to home if signed in
       } else {
         router.replace("/splash"); // ✅ go to splash if not
       }

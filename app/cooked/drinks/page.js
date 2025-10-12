@@ -8,24 +8,22 @@ export default function MealsPage() {
   const router = useRouter();
   const [products, setProducts] = useState([]);
   const [hasCartItems, setHasCartItems] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
-      // ✅ Check if user is signed in
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
         router.push("/intro");
         return;
       }
 
-      // ✅ Get cart status
       const { data: cartItems } = await supabase
         .from("carts")
         .select("id")
         .eq("user_id", user.id);
       setHasCartItems(cartItems && cartItems.length > 0);
 
-      // ✅ Fetch prepared meals
       const { data, error } = await supabase
         .from("products")
         .select("id, name, description, price, prep_time, image, tag")
@@ -33,6 +31,7 @@ export default function MealsPage() {
         .eq("type", "Prepared");
 
       if (!error) setProducts(data || []);
+      setLoading(false);
     };
 
     fetchData();
@@ -66,10 +65,20 @@ export default function MealsPage() {
 
       {/* Product List */}
       <div className="flex flex-col gap-6 p-6 pb-10">
-        {products.length === 0 ? (
-          <p className="text-gray-400 text-center mt-10">
-            No meals available right now.
-          </p>
+        {loading ? (
+          // ✅ Skeleton Loader
+          Array.from({ length: 3 }).map((_, idx) => (
+            <div
+              key={idx}
+              className="animate-pulse w-full rounded-2xl overflow-hidden bg-white/10"
+            >
+              <div className="w-full h-56 bg-white/10" />
+              <div className="p-4">
+                <div className="h-6 bg-white/10 rounded mb-2 w-1/2" />
+                <div className="h-4 bg-white/10 rounded w-3/4" />
+              </div>
+            </div>
+          ))
         ) : (
           products.map((item) => (
             <div
@@ -81,7 +90,6 @@ export default function MealsPage() {
                 className="relative w-full h-56 bg-cover bg-center"
                 style={{ backgroundImage: `url(${item.image})` }}
               >
-                {/* Tag */}
                 {item.tag && (
                   <span className="absolute top-3 left-3 bg-[#ff4b1f] text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">
                     {item.tag}
