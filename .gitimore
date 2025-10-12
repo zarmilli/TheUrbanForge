@@ -1,0 +1,57 @@
+# ============================================
+# 🚀 Next.js + PWA Project .gitignore
+# ============================================
+
+# Dependencies
+node_modules/
+
+# Build and output
+.next/
+out/
+dist/
+build/
+.vercel/
+
+# PWA generated files
+public/sw.js
+public/workbox-*.js
+public/worker-*.js
+public/service-worker.js
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Editor / IDE settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# TypeScript build artifacts
+*.tsbuildinfo
+
+# Lock files (optional)
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Miscellaneous
+*.log
+*.bak
+*.tmp
+*.orig
