@@ -1,55 +1,51 @@
-"use client";
-import { useEffect, useState } from "react";
-import { useRouter, useParams } from "next/navigation";
-import { supabase } from "@/lib/supabaseClient";
-import { FiArrowLeft } from "react-icons/fi";
-import Image from "next/image";
+"use client"
+
+import { useEffect, useState } from "react"
+import { useRouter, useParams } from "next/navigation"
+import { supabase } from "@/lib/supabaseClient"
+import { FiArrowLeft } from "react-icons/fi"
+import Image from "next/image"
+import { toast, Toaster } from "sonner"
 
 export default function ProductDetailsPage() {
-  const router = useRouter();
-  const { id } = useParams();
+  const router = useRouter()
+  const { id } = useParams()
 
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [adding, setAdding] = useState(false);
-  const [userId, setUserId] = useState(null);
-  const [toast, setToast] = useState(null);
+  const [product, setProduct] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [userId, setUserId] = useState(null)
 
   // ✅ Fetch product + user
   useEffect(() => {
     const fetchProduct = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
       if (!user) {
-        router.push("/intro");
-        return;
+        router.push("/intro")
+        return
       }
-      setUserId(user.id);
+      setUserId(user.id)
 
       const { data, error } = await supabase
         .from("products")
         .select("*")
         .eq("id", id)
-        .single();
+        .single()
 
-      if (!error) setProduct(data);
-      setLoading(false);
-    };
+      if (!error) setProduct(data)
+      setLoading(false)
+    }
 
-    fetchProduct();
-  }, [id, router]);
+    fetchProduct()
+  }, [id, router])
 
-  // ✅ Toast handler
-  const showToast = (message, type = "success") => {
-    setToast({ message, type });
-    setTimeout(() => setToast(null), 2500);
-  };
-
-  // ✅ Add to cart logic
+  // ✅ Add to cart with Sonner promise toast
   const handleAddToCart = async () => {
-    if (!userId || !product) return;
-    setAdding(true);
+  if (!userId || !product) return;
 
-    try {
+  toast.promise(
+    (async () => {
       const { data: existingItem, error: checkError } = await supabase
         .from("carts")
         .select("id, quantity")
@@ -66,23 +62,26 @@ export default function ProductDetailsPage() {
           .eq("id", existingItem.id);
         if (updateError) throw updateError;
       } else {
-        const { error: insertError } = await supabase.from("carts").insert([
-          { user_id: userId, product_id: product.id, quantity: 1 },
-        ]);
+        const { error: insertError } = await supabase
+          .from("carts")
+          .insert([{ user_id: userId, product_id: product.id, quantity: 1 }]);
         if (insertError) throw insertError;
       }
-
-      showToast("Added to cart!");
-    } catch (err) {
-      console.error(err);
-      showToast("Error adding to cart", "error");
-    } finally {
-      setAdding(false);
+    })(),
+    {
+      loading: "Adding to cart...",
+      success: "Added to cart!",
+      error: "Error adding to cart",
     }
-  };
+  );
+};
+
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-white relative">
+      {/* Toast Container */}
+      <Toaster position="bottom-center" richColors />
+
       {/* Skeleton Loader */}
       {loading ? (
         <div className="flex flex-col items-center justify-center flex-1 gap-4 animate-pulse p-6">
@@ -94,7 +93,7 @@ export default function ProductDetailsPage() {
       ) : (
         product && (
           <>
-            {/* Product Image - Full Width */}
+            {/* Product Image */}
             <div className="relative w-full h-[45vh]">
               <Image
                 src={product.image}
@@ -104,7 +103,7 @@ export default function ProductDetailsPage() {
                 priority
               />
 
-              {/* Back Button (top-left) */}
+              {/* Back Button */}
               <button
                 onClick={() => router.back()}
                 className="absolute top-5 left-5 flex items-center justify-center w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 transition"
@@ -112,7 +111,7 @@ export default function ProductDetailsPage() {
                 <FiArrowLeft size={20} />
               </button>
 
-              {/* Tag (top-right) */}
+              {/* Tag */}
               {product.tag && (
                 <span className="absolute top-5 right-5 bg-[#ff4b1f] text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">
                   {product.tag}
@@ -134,36 +133,18 @@ export default function ProductDetailsPage() {
               </p>
             </div>
 
-            {/* Fixed Add to Cart Button */}
+            {/* Add to Cart Button */}
             <div className="fixed bottom-0 left-0 w-full bg-black/90 p-4 border-t border-white/10">
               <button
                 onClick={handleAddToCart}
-                disabled={adding}
-                className={`w-full py-3 rounded-full font-semibold transition ${
-                  adding
-                    ? "bg-gray-600 cursor-not-allowed"
-                    : "bg-[#ff4b1f] hover:bg-[#ff5f33]"
-                }`}
+                className="w-full py-3 rounded-full font-semibold bg-[#ff4b1f] hover:bg-[#ff5f33] transition"
               >
-                {adding ? "Adding..." : "Add to Cart"}
+                Add to Cart
               </button>
             </div>
-
-            {/* Toast Notification */}
-            {toast && (
-              <div
-                className={`fixed bottom-20 left-1/2 transform -translate-x-1/2 px-5 py-3 rounded-full text-sm font-medium shadow-lg transition-all duration-300 ${
-                  toast.type === "error"
-                    ? "bg-red-600 text-white"
-                    : "bg-[#ff4b1f] text-white"
-                }`}
-              >
-                {toast.message}
-              </div>
-            )}
           </>
         )
       )}
     </div>
-  );
+  )
 }
